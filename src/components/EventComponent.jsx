@@ -1,11 +1,22 @@
 import './EventComponent.css';
-import { BrowserRouter, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import LoginComponent from './LoginComponent';
 import AuthProvider, { GetAuthContext } from './security/AuthContext';
-import { Button } from 'react-bootstrap';
 import ErrorComponent from './ErrorComponent';
 import EventListComponent from './EventListComponent';
 import HeaderComponent from './HeaderComponent';
+import LogoutComponent from './LogoutComponent';
+import WelcomeComponent from './WelcomeComponent';
+
+export function Authenticate({children}){
+    const authContext = GetAuthContext();
+    if(authContext.isAuthenticated){
+        return children;
+    }
+    else{
+        return <Navigate to='/login'/>
+    }
+}
 
 
 export default function EventComponent(){
@@ -16,9 +27,19 @@ export default function EventComponent(){
                 <Routes>
                     <Route path='/' element={<LoginComponent/>}/>
                     <Route path='/login' element={<LoginComponent/>}/>
-                    <Route path='/welcome/:username' element={<WelcomeComponent/>}/>
-                    <Route path='/events' element={<EventListComponent/>}/>
-
+                    <Route path='/welcome/:username' element={
+                        <Authenticate>
+                            <WelcomeComponent/>
+                        </Authenticate>
+                        }/>
+                    <Route path='/events' element={
+                        <Authenticate>
+                            <EventListComponent/>
+                        </Authenticate>}/>
+                    <Route path='/logout' element={
+                        <Authenticate>
+                            <LogoutComponent/>
+                        </Authenticate>}/>
                     <Route path='*' element={<ErrorComponent/>}/>
                 </Routes>
             </BrowserRouter>
@@ -31,24 +52,3 @@ export default function EventComponent(){
 
 
 
-function WelcomeComponent(){
-    const {username} = useParams();
-    const navigate = useNavigate();
-
-    function handleEventButton(){
-        navigate('/events');
-    }
-
-    return(
-        <div>
-            <h1>WELCOME TO EVENT MANAGEMENT</h1>
-            <h3>Your guide on the journey of managing events!
-                <br/>
-                Greetings, {username}
-                <br/>
-                You can proceed towards your Events from here!
-            </h3>
-            <Button variant='secondary' onClick={handleEventButton}>Events</Button>
-        </div>
-    );
-}
