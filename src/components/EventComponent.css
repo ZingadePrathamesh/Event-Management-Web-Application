@@ -1,0 +1,28 @@
+body{
+    padding-top: 12px;
+}
+
+.loginForm{
+    font-size: 16px;
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    background-color: rgb(215, 204, 190);
+    padding: 12px;
+    border-radius: 5px;
+    color: black;
+}
+
+.element{
+    width: 90%;
+    margin: 8px 0px;
+}
+
+input{
+    width: 100%;
+    border-radius: 5px;
+    font-size: 24px;
+}
