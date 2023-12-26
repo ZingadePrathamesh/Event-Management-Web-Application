@@ -4,7 +4,7 @@ import EventComponent from './components/EventComponent';
 
 function App() {
   return (
-    <div >
+    <div className='App'>
       <EventComponent/>
     </div>
   );
