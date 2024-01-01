@@ -5,17 +5,26 @@ import java.time.LocalDate;
 public class EventBean {
 	private Integer id;
 	private String name;
+	private String username;
 	private String status;
 	private LocalDate targetDate;
-	public EventBean(Integer id, String name, String status, LocalDate targetDate) {
+	public EventBean(Integer id, String username, String name, String status, LocalDate targetDate) {
 		super();
 		this.id = id;
+		this.username = username;
 		this.name = name;
 		this.status = status;
 		this.targetDate = targetDate;
 	}
 	public EventBean() {
 		super();
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public Integer getId() {
 		return id;
