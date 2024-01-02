@@ -5,7 +5,7 @@ import { GetAuthContext } from "./security/AuthContext";
 import './EventComponent.css';
 
 export default function LoginComponent(){
-    const [username, setUsername] = useState("React");
+    const [username, setUsername] = useState("programmer");
     const [password, setPassword] = useState("abcd");
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState(false);

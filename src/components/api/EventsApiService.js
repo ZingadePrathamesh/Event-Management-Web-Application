@@ -1,5 +1,9 @@
 import { apiClient } from "./ApiService";
 
-export function getEventsForUsername(){
-    return apiClient.get('/users/programmer/events');
+
+export function getEventsForUsername(username){
+    return apiClient.get(`/users/${username}/events`);
+}
+export function deleteEventsForId(username , id){
+    return apiClient.get(`/users/${username}/events/${id}`);
 }

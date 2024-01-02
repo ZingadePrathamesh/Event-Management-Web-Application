@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getEventsForUsername } from "./api/EventsApiService";
+import { Button } from "react-bootstrap";
 
 export default function EventListComponent(){
     const date = new Date();
-    const today = (num ) => new Date(date.getFullYear()+num, date.getMonth(), date.getDate()).toDateString();
     const [events,setEvents] = useState([])
 
     useEffect(
@@ -13,20 +13,21 @@ export default function EventListComponent(){
     function renderingList(){
         getEventsForUsername()
         .then(
-            response => console.log(response)
+            response => {
+                setEvents(response.data)
+            }
         )
         .catch(
             error => console.error(error)
         )
     }
 
-    // const events = [{id:1, name: "Birthday", status:"upcoming", targetDate: today(1) },
-    //                 {id:2, name: "Wedding" , status:"upcoming", targetDate: today(2)},
-    //                 {id:3, name: "Party" , status:"upcoming", targetDate: today(3)},
-    //                 {id:4, name: "Exam" , status:"upcoming", targetDate: today(4)},
-    //             ];
-
-
+    function updateEvent(id){
+        console.log("updating: "+ id);
+    }    
+    function deleteEvent(id){
+        console.log("deleting: "+ id);
+    }
 
     return(
         <div className="container">
@@ -39,6 +40,8 @@ export default function EventListComponent(){
                         <th>Name</th>
                         <th>Status</th>
                         <th>Date</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +53,8 @@ export default function EventListComponent(){
                                 <td>{event.name}</td>
                                 <td>{event.status}</td>
                                 <td>{event.targetDate}</td>
+                                <td><Button className="btn btn-dark" onClick={()=>updateEvent(event.id)}>Update</Button></td>
+                                <td><Button className="btn btn-warning" onClick={()=>deleteEvent(event.id)}>Delete</Button></td>
                             </tr>)
                         )
                     }
