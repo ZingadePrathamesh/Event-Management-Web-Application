@@ -29,11 +29,10 @@ export default function EventListComponent(){
 
     function updateEvent(id){
         console.log("updating: "+ id);
-        navigate('/event-form')
+        navigate(`/event-form/${id}`)
     }  
 
     function deleteEvent(id){
-        console.log("deleting: "+ id);
         deleteEventsForId(username, id)
         .then(
             alert("deleted!")

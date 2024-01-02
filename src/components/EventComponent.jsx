@@ -37,7 +37,7 @@ export default function EventComponent(){
                         <Authenticate>
                             <EventListComponent/>
                         </Authenticate>}/>
-                    <Route path='/event-form' element={
+                    <Route path='/event-form/:id' element={
                         <Authenticate>
                             <EventFormComponent/>
                         </Authenticate>}/>
