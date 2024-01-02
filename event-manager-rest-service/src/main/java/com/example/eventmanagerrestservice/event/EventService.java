@@ -38,4 +38,11 @@ public class EventService {
 		return events.stream().filter(predicate ).findFirst().orElse(null);
 	}
 	
+	public void deleteById(Integer id) {
+		Predicate<? super EventBean> predicate = event-> event.getId() == id;
+		events.removeIf(predicate);
+	}
+	
+	
+	
 }

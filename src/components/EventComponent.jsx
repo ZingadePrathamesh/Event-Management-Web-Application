@@ -7,6 +7,7 @@ import EventListComponent from './EventListComponent';
 import HeaderComponent from './HeaderComponent';
 import LogoutComponent from './LogoutComponent';
 import WelcomeComponent from './WelcomeComponent';
+import EventFormComponent from './EventFormComponent';
 
 export function Authenticate({children}){
     const authContext = GetAuthContext();
@@ -35,6 +36,10 @@ export default function EventComponent(){
                     <Route path='/events' element={
                         <Authenticate>
                             <EventListComponent/>
+                        </Authenticate>}/>
+                    <Route path='/event-form' element={
+                        <Authenticate>
+                            <EventFormComponent/>
                         </Authenticate>}/>
                     <Route path='/logout' element={
                         <Authenticate>

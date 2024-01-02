@@ -2,6 +2,8 @@ package com.example.eventmanagerrestservice.event;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,5 +27,11 @@ public class EventController {
 	@GetMapping(path = "/users/{username}/events/{id}")
 	public EventBean getEventById(@PathVariable String username ,@PathVariable Integer id) {
 		return eventService.findById(id);
+	}
+	
+	@DeleteMapping(path = "/users/{username}/events/{id}")
+	public ResponseEntity<EventBean> deleteEventById(@PathVariable String username ,@PathVariable Integer id) {
+		eventService.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 }

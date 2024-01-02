@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
-import { getEventsForUsername } from "./api/EventsApiService";
+import { deleteEventsForId, getEventsForUsername } from "./api/EventsApiService";
 import { Button } from "react-bootstrap";
+import { GetAuthContext } from "./security/AuthContext";
+import { useNavigate } from "react-router";
 
 export default function EventListComponent(){
-    const date = new Date();
+    const navigate = useNavigate();
+    const authContext = GetAuthContext();
+    const username = authContext.username;
     const [events,setEvents] = useState([])
 
     useEffect(
-        renderingList, []
+        renderingList, 
+        [deleteEvent]
     )
 
     function renderingList(){
-        getEventsForUsername()
+        getEventsForUsername(username)
         .then(
             response => {
                 setEvents(response.data)
@@ -24,9 +29,18 @@ export default function EventListComponent(){
 
     function updateEvent(id){
         console.log("updating: "+ id);
-    }    
+        navigate('/event-form')
+    }  
+
     function deleteEvent(id){
         console.log("deleting: "+ id);
+        deleteEventsForId(username, id)
+        .then(
+            alert("deleted!")
+        )
+        .catch(
+            error => console.error(error)
+        )
     }
 
     return(
