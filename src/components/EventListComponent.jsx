@@ -42,6 +42,10 @@ export default function EventListComponent(){
         )
     }
 
+    function createEvent(id){
+        navigate(`/event-form/${id}`)
+    }
+
     return(
         <div className="container">
             <h1>Your Events</h1>
@@ -73,6 +77,7 @@ export default function EventListComponent(){
                     }
                 </tbody>
             </table>
+            <Button className="btn btn-light" onClick={()=>createEvent(-1)}>Add</Button>
         </div>
     );
 }

@@ -23,6 +23,13 @@ public class EventService {
 		return events;
 	}
 	
+	public EventBean save(EventBean event) {
+		EventBean newEvent = new EventBean(++eventCount, 
+				event.getUsername(), event.getName(), event.getStatus(), event.getTargetDate());
+		events.add(newEvent);
+		return newEvent;
+	}
+	
 	public List<EventBean> findAllByUsername(String username) {
 		List<EventBean> filteredEvents= new ArrayList<EventBean>();
 		for(EventBean eve: events) {
@@ -41,6 +48,11 @@ public class EventService {
 	public void deleteById(Integer id) {
 		Predicate<? super EventBean> predicate = event-> event.getId() == id;
 		events.removeIf(predicate);
+	}
+	
+	public void updateById(Integer id, EventBean newEvent) {
+		deleteById(newEvent.getId());
+		events.add(newEvent);
 	}
 	
 	

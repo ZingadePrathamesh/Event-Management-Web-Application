@@ -1,12 +1,13 @@
 import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { retrieveEventForId } from "./api/EventsApiService";
+import { useNavigate, useParams } from "react-router";
+import { createEventApi, retrieveEventForId, updateEventsForIdApi } from "./api/EventsApiService";
 import { GetAuthContext } from "./security/AuthContext";
 import { Button } from "react-bootstrap";
 
 export default function EventFormComponent(){
     const {id} = useParams();
+    const navigate = useNavigate();
     const authContext = GetAuthContext();
     const username = authContext.username;
     const [name, setName] = useState("");
@@ -34,15 +35,42 @@ export default function EventFormComponent(){
         }
     }
 
-    function handleSubmit(){
+    function handleSubmit(values){
         console.log(name + " " + status +" "+ targetDate);
+        const newEvent = {
+            id,
+            username,
+            name: values.name,
+            status: values.status,
+            targetDate: values.targetDate
+        }
+        console.log(newEvent);
+        if(id!=-1){
+            updateEventsForIdApi(username, id, newEvent)
+            .then(
+                navigate('/events')
+            )
+            .catch(
+                error => console.error(error)
+            )
+        }
+        else{
+            createEventApi(username, newEvent)
+            .then(
+                response => console.log(response)
+            )
+            .catch(
+                error=> console.error(error)
+            )
+        }
     }
 
     return(
         <div className="p-4">
             Form
             <Formik initialValues={{name, status, targetDate}}
-            enableReinitialize={true}>
+            enableReinitialize={true}
+            onSubmit={handleSubmit}>
                 {
                     (props)=>(
                         <Form>
@@ -59,7 +87,7 @@ export default function EventFormComponent(){
                                 <Field className="form-control p-1" name="targetDate" type="date"/>
                             </fieldset>
                             <div>
-                                <Button className="btn btn-light m-3" type="submit" onClick={handleSubmit}>Save</Button>
+                                <Button className="btn btn-light m-3" type="submit">Save</Button>
                             </div>
                         </Form>
                     )
