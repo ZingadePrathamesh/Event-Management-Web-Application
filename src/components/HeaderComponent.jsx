@@ -13,7 +13,7 @@ export default function HeaderComponent(){
     return(
         <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand href="#home">Event Management</Navbar.Brand>
           <Nav className="me-auto">
             {isAuthenticated && <Link className="nav-link" to="/welcome/:username">Home</Link>}
             {isAuthenticated && <Link className="nav-link" to="/events">Events</Link>}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { createEventApi, retrieveEventForId, updateEventsForIdApi } from "./api/EventsApiService";
 import { GetAuthContext } from "./security/AuthContext";
-import { Button } from "react-bootstrap";
+import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 
 export default function EventFormComponent(){
     const {id} = useParams();
@@ -36,7 +36,6 @@ export default function EventFormComponent(){
     }
 
     function handleSubmit(values){
-        console.log(name + " " + status +" "+ targetDate);
         const newEvent = {
             id,
             username,
@@ -44,7 +43,6 @@ export default function EventFormComponent(){
             status: values.status,
             targetDate: values.targetDate
         }
-        console.log(newEvent);
         if(id!=-1){
             updateEventsForIdApi(username, id, newEvent)
             .then(
@@ -57,7 +55,7 @@ export default function EventFormComponent(){
         else{
             createEventApi(username, newEvent)
             .then(
-                response => console.log(response)
+                navigate("/events")
             )
             .catch(
                 error=> console.error(error)
@@ -65,12 +63,14 @@ export default function EventFormComponent(){
         }
     }
 
+    const statusOptions = ["Upcoming", "Ongoing", "Completed"];
+
     return(
         <div className="p-4">
-            Form
+            <h1>Event Form</h1>
             <Formik initialValues={{name, status, targetDate}}
             enableReinitialize={true}
-            onSubmit={handleSubmit}>
+            onSubmit={(values) => handleSubmit(values)}>
                 {
                     (props)=>(
                         <Form>
@@ -80,7 +80,13 @@ export default function EventFormComponent(){
                             </fieldset>
                             <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
                                 <label className="form-label">Status</label>
-                                <Field className="form-control p-1" name="status" type="text"/>
+                                <Field as="select" name="status" className="form-select">
+                                    {statusOptions.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option}
+                                    </option>
+                                    ))}
+                                </Field>
                             </fieldset>
                             <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
                                 <label className="form-label">Target Date</label>
