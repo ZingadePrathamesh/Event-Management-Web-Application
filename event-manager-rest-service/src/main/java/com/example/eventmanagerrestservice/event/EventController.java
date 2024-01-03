@@ -17,12 +17,10 @@ import jakarta.validation.Valid;
 @RestController
 public class EventController {
 	
-	EventService eventService;
 	EventJPAService eventJPAService;
 	
-	public EventController(EventService eventService , EventJPAService eventJPAService) {
+	public EventController(EventJPAService eventJPAService) {
 		super();
-		this.eventService = eventService;
 		this.eventJPAService = eventJPAService;
 	}
 

@@ -1,10 +1,15 @@
 package com.example.eventmanagerrestservice.event;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.example.eventmanagerrestservice.task.TaskBean;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -13,17 +18,22 @@ public class EventBean {
 	
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer eventId;
 	@Size(min=2, message="Atleast 2 characters")
 	private String name;
 	private String username;
 	@NotNull
 	private String status;
 	
+
+	@OneToMany
+	@JsonIgnore
+	private List<TaskBean> tasks;
+	
 	private LocalDate targetDate;
 	public EventBean(Integer id, String username, String name, String status, LocalDate targetDate) {
 		super();
-		this.id = id;
+		this.eventId = id;
 		this.username = username;
 		this.name = name;
 		this.status = status;
@@ -33,17 +43,24 @@ public class EventBean {
 		super();
 	}
 	
+	public Integer getEventId() {
+		return eventId;
+	}
+	public void setEventId(Integer eventId) {
+		this.eventId = eventId;
+	}
+	public List<TaskBean> getTasks() {
+		return tasks;
+	}
+	public void setTasks(List<TaskBean> tasks) {
+		this.tasks = tasks;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -66,7 +83,7 @@ public class EventBean {
 	
 	@Override
 	public String toString() {
-		return "EventBean [id=" + id + ", name=" + name + ", status=" + status + ", targetDate=" + targetDate + "]";
+		return "EventBean [id=" + eventId + ", name=" + name + ", status=" + status + ", targetDate=" + targetDate + "]";
 	}
 	
 	
