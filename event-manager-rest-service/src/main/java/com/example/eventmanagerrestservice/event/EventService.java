@@ -12,12 +12,12 @@ public class EventService {
 	private static List<EventBean> events = new ArrayList<EventBean>();
 	private static Integer eventCount = 0;
 	
-	static {
-		events.add(new EventBean(++eventCount, "programmer", "Birthday" ,"upcoming", LocalDate.now().plusMonths(6)));
-		events.add(new EventBean(++eventCount, "programmer", "Marriage" ,"upcoming", LocalDate.now().plusMonths(6)));
-		events.add(new EventBean(++eventCount, "programmer", "Christmas" ,"upcoming", LocalDate.now().plusMonths(6)));
-		events.add(new EventBean(++eventCount, "user", "Christmas" ,"upcoming", LocalDate.now().plusMonths(6)));
-	}
+//	static {
+//		events.add(new EventBean(++eventCount, "programmer", "Birthday" ,"upcoming", LocalDate.now().plusMonths(6)));
+//		events.add(new EventBean(++eventCount, "programmer", "Marriage" ,"upcoming", LocalDate.now().plusMonths(6)));
+//		events.add(new EventBean(++eventCount, "programmer", "Christmas" ,"upcoming", LocalDate.now().plusMonths(6)));
+//		events.add(new EventBean(++eventCount, "user", "Christmas" ,"upcoming", LocalDate.now().plusMonths(6)));
+//	}
 	
 	public List<EventBean> findAll() {
 		return events;

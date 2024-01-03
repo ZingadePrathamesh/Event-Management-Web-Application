@@ -94,7 +94,9 @@ export default function EventFormComponent(){
             <Formik initialValues={{name, status, targetDate}}
             enableReinitialize={true}
             onSubmit={(values) => handleSubmit(values)}
-            validate={validationFunction}>
+            validate={validationFunction}
+            validateOnBlur={false}
+            validateOnChange={false}>
                 {
                     (props)=>(
                         <Form className="form">
