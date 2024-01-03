@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class EventController {
 	
@@ -28,7 +30,7 @@ public class EventController {
 	}
 	
 	@PostMapping(path= "/users/{username}/events")
-	public void createEventsForUser(@RequestBody EventBean event){
+	public void createEventsForUser(@RequestBody @Valid EventBean event){
 		eventService.save(event);
 	}
 	
@@ -49,7 +51,7 @@ public class EventController {
 	//To update the event. 
 	//This calls the method which deletes the previous event having the same id and then adds a new one.
 	@PutMapping(path = "/users/{username}/events/{id}")
-	public void updateEvent(@PathVariable Integer id,@RequestBody EventBean event) {
+	public void updateEvent(@PathVariable Integer id,@RequestBody @Valid EventBean event) {
 		eventService.updateById(id, event);
 	}
 	

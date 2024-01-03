@@ -41,7 +41,7 @@ public class EventService {
 	}
 	
 	public EventBean findById(Integer id) {
-		Predicate<? super EventBean> predicate = event-> event.getId() == id;
+		Predicate<? super EventBean> predicate = event -> event.getId() == id;
 		return events.stream().filter(predicate ).findFirst().orElse(null);
 	}
 	

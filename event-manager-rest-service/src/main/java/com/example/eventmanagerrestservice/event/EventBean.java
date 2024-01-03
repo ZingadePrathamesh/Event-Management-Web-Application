@@ -2,11 +2,18 @@ package com.example.eventmanagerrestservice.event;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class EventBean {
+	
 	private Integer id;
+	@Size(min=2, message="Atleast 2 characters")
 	private String name;
 	private String username;
+	@NotNull
 	private String status;
+	
 	private LocalDate targetDate;
 	public EventBean(Integer id, String username, String name, String status, LocalDate targetDate) {
 		super();
