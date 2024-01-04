@@ -122,6 +122,7 @@ export default function EventFormComponent(){
                             <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
                                 <label className="form-label">Status</label>
                                 <Field as="select" name="status" className="form-select">
+                                    <option value="" key="">Select an option</option>
                                     {statusOptions.map((option) => (
                                     <option key={option} value={option}>
                                         {option}

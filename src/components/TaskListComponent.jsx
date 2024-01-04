@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { GetAuthContext } from "./security/AuthContext";
 import { retrieveTasksForIdApi } from "./api/TasksApiService";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 export default function TaskListComponent({eventId}){
     const authContext = GetAuthContext();
+    const navigate = useNavigate();
     const username = authContext.username;
     const [tasks, setTasks] = useState([]);
 
@@ -25,18 +28,24 @@ export default function TaskListComponent({eventId}){
         )
     }
 
-
+    function createNewTask(eventId, taskId){
+        navigate(`/events/${eventId}/tasks/${taskId}`)
+    }
 
 
     return(
         <div>
             <table className="table table-light table-striped table-hover">
                 <thead>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Assigned</th>
-                    <th>Deadline</th>
-                    <th>Status</th>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Assigned</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
                     {
@@ -46,14 +55,18 @@ export default function TaskListComponent({eventId}){
                                 <td>{task.taskName}</td>
                                 <td>{task.assignedTo}</td>
                                 <td>{task.deadline}</td>
-                                <td>{task.status}</td>
+                                <td>{task.taskStatus}</td>
+                                <td><Button className="btn btn-dark" onClick={()=>createNewTask(eventId, task.taskId)}>Update</Button></td>
+                                <td><Button className="btn btn-danger">Delete</Button></td>
                             </tr>
                         )
                         )
                     }
                 </tbody>
-
             </table>
+            <div>
+                <Button className="btn btn-light" onClick={()=>createNewTask(eventId, -1)}>Add</Button>
+            </div>
         </div>
     );
 }

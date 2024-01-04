@@ -7,7 +7,7 @@ import { GetAuthContext } from "./security/AuthContext";
 export default function TaskComponent(){
     const authContext = GetAuthContext();
     const username = authContext.username;
-    const [eventId, setEventId] = useState(-1);
+    const [eventId, setEventId] = useState();
     const [events, setEvents] = useState([])
     
     useEffect(
@@ -43,7 +43,7 @@ export default function TaskComponent(){
                 <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
                     <label className="form-label">Status</label>
                     <Field as="select" name="eventId"  onChange={handleEventChange} className="form-select">
-                        <option key="" value="">Select an option</option>
+                        <option key="-1" value="-1">Select an option</option>
                         {events.map((event) => (
                         <option key={event.eventId} value={event.eventId}>
                             {event.name}

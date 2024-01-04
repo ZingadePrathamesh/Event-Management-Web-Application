@@ -51,12 +51,12 @@ public class TaskController {
 		Optional<EventBean> eventOpt = eventJPAService.findById(eventId);
 		if(eventOpt.isEmpty()) throw new EventNotFoundException("id: "+ eventId);
 		
-		
-		Predicate<? super TaskBean> predicate = task -> task.getTaskId()==taskId;
-		TaskBean taskBean = eventOpt.get().getTasks().stream().filter(predicate ).findFirst().orElse(null);
-		if(taskBean != null) return taskBean;
+		System.out.println(taskId);
+		Predicate<? super TaskBean> predicate = newTask -> newTask.getTaskId()==taskId;
+		TaskBean taskBean = eventOpt.get().getTasks().stream().filter(predicate).findFirst().orElse(null);
+		if(taskBean == null)throw new TaskNotFoundException(taskId); 
 		else {
-			throw new TaskNotFoundException(taskId);
+			return taskBean;
 		}
 	}
 	

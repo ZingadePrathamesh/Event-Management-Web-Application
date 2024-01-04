@@ -11,6 +11,7 @@ import EventFormComponent from './EventFormComponent';
 import EventViewComponent from './EventViewComponent';
 import TaskListComponent from './TaskListComponent';
 import TaskComponent from './TaskComponent';
+import TaskFormComponent from './TaskFormComponent';
 
 export function Authenticate({children}){
     const authContext = GetAuthContext();
@@ -51,6 +52,10 @@ export default function EventComponent(){
                     <Route path='/tasks' element={
                         <Authenticate>
                             <TaskComponent/>
+                        </Authenticate>}/>
+                    <Route path='events/:eventId/tasks/:taskId' element={
+                        <Authenticate>
+                            <TaskFormComponent/>
                         </Authenticate>}/>
                     <Route path='/logout' element={
                         <Authenticate>
