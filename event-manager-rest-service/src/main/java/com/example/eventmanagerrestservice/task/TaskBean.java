@@ -27,7 +27,7 @@ public class TaskBean {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
-	private EventBean event;
+	private EventBean eventBean;
 
 	public TaskBean(Integer taskId, String taskName, String taskStatus, String assignedTo, LocalDate deadline) {
 		super();
@@ -83,17 +83,17 @@ public class TaskBean {
 	}
 
 	public EventBean getEvent() {
-		return event;
+		return eventBean;
 	}
 
 	public void setEvent(EventBean event) {
-		this.event = event;
+		this.eventBean = event;
 	}
 
 	@Override
 	public String toString() {
 		return "TaskBean [taskId=" + taskId + ", taskName=" + taskName + ", taskStatus=" + taskStatus + ", assignedTo="
-				+ assignedTo + ", deadline=" + deadline + ", event=" + event + "]";
+				+ assignedTo + ", deadline=" + deadline + ", event=" + eventBean + "]";
 	}
 	
 	

@@ -26,7 +26,7 @@ public class EventBean {
 	private String status;
 	
 
-	@OneToMany
+	@OneToMany(mappedBy = "eventBean")
 	@JsonIgnore
 	private List<TaskBean> tasks;
 	
