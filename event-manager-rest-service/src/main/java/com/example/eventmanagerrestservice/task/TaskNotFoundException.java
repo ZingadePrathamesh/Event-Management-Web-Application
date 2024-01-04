@@ -11,7 +11,7 @@ public class TaskNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public TaskNotFoundException(Integer id) {
-		super("id: " + id);
+		super("Task with id: " + id+ " Not found!");
 	}
 
 }

@@ -3,6 +3,7 @@ import { deleteEventsForId, getEventsForUsername } from "./api/EventsApiService"
 import { Button } from "react-bootstrap";
 import { GetAuthContext } from "./security/AuthContext";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function EventListComponent(){
     const navigate = useNavigate();
@@ -50,7 +51,7 @@ export default function EventListComponent(){
         <div className="container">
             <h1>Your Events</h1>
             <hr/>
-            <table className="table">
+            <table className="table table-light table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -65,13 +66,13 @@ export default function EventListComponent(){
                     {
                         events.map(
                             event=>
-                            (<tr key={event.id}>
-                                <td>{event.id}</td>
-                                <td>{event.name}</td>
-                                <td>{event.status}</td>
-                                <td>{event.targetDate}</td>
-                                <td><Button className="btn btn-dark" onClick={()=>updateEvent(event.id)}>Update</Button></td>
-                                <td><Button className="btn btn-warning" onClick={()=>deleteEvent(event.id)}>Delete</Button></td>
+                            (<tr key={event.eventId}>
+                                <td><Link className="nav-link" to={`/event-view/${event.eventId}`}>{event.eventId}</Link></td>
+                                <td><Link className="nav-link" to={`/event-view/${event.eventId}`}>{event.name}</Link></td>
+                                <td><Link className="nav-link" to={`/event-view/${event.eventId}`}>{event.status}</Link></td>
+                                <td><Link className="nav-link" to={`/event-view/${event.eventId}`}>{event.targetDate}</Link></td>
+                                <td><Button className="btn btn-dark" onClick={()=>updateEvent(event.eventId)}>Update</Button></td>
+                                <td><Button className="btn btn-warning" onClick={()=>deleteEvent(event.eventId)}>Delete</Button></td>
                             </tr>)
                         )
                     }

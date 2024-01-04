@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { createEventApi, retrieveEventForId, updateEventsForIdApi } from "./api/EventsApiService";
 import { GetAuthContext } from "./security/AuthContext";
-import { Button, Dropdown, DropdownButton } from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import moment from "moment";
 
 export default function EventFormComponent(){
-    const {id} = useParams();
+    const {eventId} = useParams();
     const navigate = useNavigate();
     const authContext = GetAuthContext();
     const username = authContext.username;
@@ -21,8 +21,8 @@ export default function EventFormComponent(){
     )
 
     function retrieveEvent(){
-        if(id!=-1){
-            retrieveEventForId(username, id)
+        if(eventId!=-1){
+            retrieveEventForId(username, eventId)
             .then(
                 response=>{
                     setName(response.data.name)
@@ -38,14 +38,14 @@ export default function EventFormComponent(){
 
     function handleSubmit(values){
         const newEvent = {
-            id,
+            eventId,
             username,
             name: values.name,
             status: values.status,
             targetDate: values.targetDate
         }
-        if(id!=-1){
-            updateEventsForIdApi(username, id, newEvent)
+        if(eventId!=-1){
+            updateEventsForIdApi(username, eventId, newEvent)
             .then(
                 navigate('/events')
             )

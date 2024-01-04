@@ -7,8 +7,8 @@ export function getEventsForUsername(username){
 export function createEventApi(username, newEvent){
     return apiClient.post(`/users/${username}/events`, newEvent);
 }
-export function retrieveEventForId(username, id){
-    return apiClient.get(`/users/${username}/events/${id}`)
+export function retrieveEventForId(username, eventId){
+    return apiClient.get(`/users/${username}/events/${eventId}`)
 }
 export function deleteEventsForId(username , id){
     return apiClient.delete(`/users/${username}/events/${id}`)
