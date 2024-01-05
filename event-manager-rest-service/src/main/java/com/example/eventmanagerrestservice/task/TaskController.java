@@ -65,10 +65,6 @@ public class TaskController {
 		Optional<EventBean> eventOpt = eventJPAService.findById(eventId);
 		if(eventOpt.isEmpty()) throw new EventNotFoundException("id: "+ eventId);
 		
-		
-		System.out.println(taskId);
-		System.out.println(eventId);
-		
 		taskJPAService.deleteById(taskId);
 		return ResponseEntity.noContent().build();
 	}

@@ -2,7 +2,11 @@ import { apiClient } from "./ApiService";
 
 
 export function getEventsForUsername(username){
-    return apiClient.get(`/users/${username}/events`);
+    return apiClient.get(`/users/${username}/events`, {
+        headers: {
+            Authorization: 'Basic cHJvZ3JhbW1lcjphYmNk'
+        }
+    });
 }
 export function createEventApi(username, newEvent){
     return apiClient.post(`/users/${username}/events`, newEvent);
