@@ -13,5 +13,8 @@ export function updateTasksApi(username, eventId, taskId, task){
 export function getTaskForIdApi(username, eventId, taskId){
     return apiClient.get(`/users/${username}/events/${eventId}/tasks/${taskId}`);
 }
+export function deleteTaskForIdApi(username, eventId, taskId){
+    return apiClient.delete(`/users/${username}/events/${eventId}/tasks/${taskId}`);
+}
 
 

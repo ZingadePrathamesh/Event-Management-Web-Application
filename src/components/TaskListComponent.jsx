@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GetAuthContext } from "./security/AuthContext";
-import { retrieveTasksForIdApi } from "./api/TasksApiService";
+import { deleteTaskForIdApi, retrieveTasksForIdApi } from "./api/TasksApiService";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
@@ -12,7 +12,7 @@ export default function TaskListComponent({eventId}){
 
     useEffect(
         retrieveTasks, 
-        []
+        [deleteTask]
     )
 
     function retrieveTasks(){
@@ -32,6 +32,15 @@ export default function TaskListComponent({eventId}){
         navigate(`/events/${eventId}/tasks/${taskId}`)
     }
 
+    function deleteTask(eventId, taskId){
+        deleteTaskForIdApi(username, eventId, taskId)
+        .then(
+            alert("Deleted Successfully")
+        )
+        .catch(
+            error=>console.error(error)
+        )
+    }
 
     return(
         <div>
@@ -57,7 +66,7 @@ export default function TaskListComponent({eventId}){
                                 <td>{task.deadline}</td>
                                 <td>{task.taskStatus}</td>
                                 <td><Button className="btn btn-dark" onClick={()=>createNewTask(eventId, task.taskId)}>Update</Button></td>
-                                <td><Button className="btn btn-danger">Delete</Button></td>
+                                <td><Button className="btn btn-danger" onClick={()=>deleteTask(eventId, task.taskId)}>Delete</Button></td>
                             </tr>
                         )
                         )

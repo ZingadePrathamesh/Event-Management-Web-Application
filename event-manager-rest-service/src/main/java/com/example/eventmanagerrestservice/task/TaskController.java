@@ -50,10 +50,10 @@ public class TaskController {
 	public TaskBean getTaskFromId(@PathVariable Integer eventId, @PathVariable Integer taskId) {
 		Optional<EventBean> eventOpt = eventJPAService.findById(eventId);
 		if(eventOpt.isEmpty()) throw new EventNotFoundException("id: "+ eventId);
+		List<TaskBean> tasks = eventOpt.get().getTasks();
 		
-		System.out.println(taskId);
-		Predicate<? super TaskBean> predicate = newTask -> newTask.getTaskId()==taskId;
-		TaskBean taskBean = eventOpt.get().getTasks().stream().filter(predicate).findFirst().orElse(null);
+		Predicate<? super TaskBean> predicate = newTask -> newTask.getTaskId().equals(taskId);
+		TaskBean taskBean = tasks.stream().filter(predicate).findFirst().orElse(null);
 		if(taskBean == null)throw new TaskNotFoundException(taskId); 
 		else {
 			return taskBean;
@@ -65,8 +65,11 @@ public class TaskController {
 		Optional<EventBean> eventOpt = eventJPAService.findById(eventId);
 		if(eventOpt.isEmpty()) throw new EventNotFoundException("id: "+ eventId);
 		
-		Predicate<? super TaskBean> predicate = task -> task.getTaskId()==taskId;
-		eventOpt.get().getTasks().removeIf(predicate);
+		
+		System.out.println(taskId);
+		System.out.println(eventId);
+		
+		taskJPAService.deleteById(taskId);
 		return ResponseEntity.noContent().build();
 	}
 	
@@ -75,15 +78,17 @@ public class TaskController {
 			@RequestBody TaskBean task) {
 		Optional<EventBean> eventOpt = eventJPAService.findById(eventId);
 		if(eventOpt.isEmpty()) throw new EventNotFoundException("id: "+ eventId);
+		List<TaskBean> tasks = eventOpt.get().getTasks();
 		
-		Predicate<? super TaskBean> predicate = tas -> tas.getTaskId()==taskId;
-		TaskBean taskBean = eventOpt.get().getTasks().stream().filter(predicate).findFirst().orElse(null);
-		if(task == null) throw new TaskNotFoundException(taskId);
-		else {
+		Predicate<? super TaskBean> predicate = tas -> tas.getTaskId().equals(taskId);
+		TaskBean taskBean = tasks.stream().filter(predicate).findFirst().orElse(null);
+		if(taskBean == null) postTaskForEvent(eventId, task);
+		else{
+			taskBean.setEvent(eventOpt.get());
 			taskBean.setAssignedTo(task.getAssignedTo());
 			taskBean.setDeadline(task.getDeadline());
 			taskBean.setTaskName(task.getTaskName());
-			taskBean.setTaskStatus(task.getTaskStatus());
+			taskBean.setTaskStatus(task.getTaskStatus());			
 			taskJPAService.save(taskBean);
 		}
 		return ResponseEntity.ok().build();
