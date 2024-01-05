@@ -29,13 +29,18 @@ export default function LoginComponent(){
     //     }
     // }    
 
-    function authenticate(values){
-        if(authContext.login(values.username, values.password)){
-            navigate(`/welcome/${values.username}`);
-        }
-        else{
+    async function authenticate(values){
+        try {
+            if(await authContext.login(values.username, values.password)){
+                navigate(`/welcome/${values.username}`);
+            }
+            else{
+                setErrorMessage(true);
+            }
+        } catch (error) {
             setErrorMessage(true);
         }
+
     }
     function validationLogin(values){
         const errors = {}
