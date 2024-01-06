@@ -1,0 +1,7 @@
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummy --env MYSQL_USER=eventdb --env MYSQL_PASSWORD=dummy --env MYSQL_DATABASE=eventsqldb --name mysql_event --publish 3310:3306 mysql:8-oracle
+//run the above in your command line interface after installing and starting the docker
+
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3310/eventsqldb
+spring.datasource.username=eventdb
+spring.datasource.password=dummy
