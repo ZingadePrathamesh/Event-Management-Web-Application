@@ -12,7 +12,7 @@ export default function TaskListComponent({eventId}){
 
     useEffect(
         retrieveTasks, 
-        [deleteTask]
+        []
     )
 
     function retrieveTasks(){
@@ -35,7 +35,10 @@ export default function TaskListComponent({eventId}){
     function deleteTask(eventId, taskId){
         deleteTaskForIdApi(username, eventId, taskId)
         .then(
-            alert("Deleted Successfully")
+            ()=>{
+                alert("Deleted Successfully")
+                retrieveTasks()
+            }
         )
         .catch(
             error=>console.error(error)

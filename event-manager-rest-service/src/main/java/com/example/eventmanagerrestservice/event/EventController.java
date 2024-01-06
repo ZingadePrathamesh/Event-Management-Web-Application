@@ -12,16 +12,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.eventmanagerrestservice.task.TaskBean;
+import com.example.eventmanagerrestservice.task.TaskJPAService;
+
 import jakarta.validation.Valid;
 
 @RestController
 public class EventController {
 	
 	EventJPAService eventJPAService;
+	TaskJPAService taskJPAService;
 	
-	public EventController(EventJPAService eventJPAService) {
+	public EventController(EventJPAService eventJPAService, TaskJPAService taskJPAService) {
 		super();
 		this.eventJPAService = eventJPAService;
+		this.taskJPAService = taskJPAService;
 	}
 
 
@@ -48,6 +53,11 @@ public class EventController {
 	//To delete the event using the id
 	@DeleteMapping(path = "/users/{username}/events/{id}")
 	public ResponseEntity<EventBean> deleteEventById(@PathVariable String username ,@PathVariable Integer id) {
+		Optional<EventBean> event = eventJPAService.findById(id);
+		List<TaskBean> tasks = event.get().getTasks();
+		for(TaskBean task: tasks) {
+			taskJPAService.deleteById(task.getTaskId());
+		}
 		eventJPAService.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}

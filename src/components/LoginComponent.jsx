@@ -42,9 +42,9 @@ export default function LoginComponent(){
         }
 
     }
-    function validationLogin(values){
+    async function validationLogin(values){
         const errors = {}
-        if(!authContext.login(values.username, values.password)){
+        if(await !authContext.login(values.username, values.password)){
             errors.username = "invalid credentials"
         }
         return errors;
@@ -84,6 +84,7 @@ export default function LoginComponent(){
                         name="username"
                         className="alert alert-warning"
                     />
+                    {errorMessage && <div>Invalid credentials</div>}
                     <fieldset className="form-group ">
                         <label className="form-label">Username</label>
                         <Field type = "text" name="username" className="form-control"/>

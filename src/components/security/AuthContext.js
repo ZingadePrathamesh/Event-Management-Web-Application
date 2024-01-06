@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { executeBasicAuthentication } from "../api/ApiService";
+import { apiClient, executeBasicAuthentication } from "../api/ApiService";
+import { configure } from "@testing-library/react";
 
 export const AuthContext = createContext();
 export const GetAuthContext = ()=> useContext(AuthContext);
@@ -19,6 +20,13 @@ export default function AuthProvider({children}){
                 setToken(baToken)
                 setIsAuthenticated(true);
                 setUsername(username)
+
+                apiClient.interceptors.request.use(
+                    (config) =>{
+                        config.headers.Authorization = baToken
+                        return config;
+                    }
+                )
                 return true;
             }
             else{
@@ -38,7 +46,7 @@ export default function AuthProvider({children}){
     }
 
     return(
-        <AuthContext.Provider value = {{login, isAuthenticated, username, logout}}> 
+        <AuthContext.Provider value = {{login, isAuthenticated, username, logout, token}}> 
             {children}
         </AuthContext.Provider>
     );   

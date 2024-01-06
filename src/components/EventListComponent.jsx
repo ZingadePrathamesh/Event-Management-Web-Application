@@ -13,15 +13,13 @@ export default function EventListComponent(){
 
     useEffect(
         renderingList, 
-        [deleteEvent]
+        []
     )
 
     function renderingList(){
-        getEventsForUsername(username)
+         getEventsForUsername(username)
         .then(
-            response => {
-                setEvents(response.data)
-            }
+            response => setEvents(response.data)
         )
         .catch(
             error => console.error(error)
@@ -36,7 +34,10 @@ export default function EventListComponent(){
     function deleteEvent(id){
         deleteEventsForId(username, id)
         .then(
-            alert("deleted!")
+            ()=>{
+                alert("deleted!")
+                renderingList()
+            }
         )
         .catch(
             error => console.error(error)
