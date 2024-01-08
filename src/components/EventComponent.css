@@ -14,31 +14,49 @@
 }
 
 .welcome-body{
+    background: url('image/eventbg.png');
+    height: 100%;
     display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+}
+.event-body{
+    background: url('image/eventbg.png');
+    height: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
     flex-direction: column;
 }
 
+.mid-div{
+    display: flex;
+    align-items: start;
+}
+
+.image{
+    margin: 0px 16px;
+    height: 150px;
+    border-width: 5px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px black;
+}
 .title-body{
     width: 100%;
     margin: 0px 16px;
     padding: 0px 16px;
 }
 
-.tutorial-box{
-    background-color: gainsboro;
-    display: flex;
-    border-radius: 15px;
-    flex-direction: column;
-    margin-bottom: 4em;
-}
-
-
 .title{
     font-size:xx-large;
     font-weight: bolder;
 }
+.event-title{
+    font-weight: bolder;
+}
 
 .tutorial{
-    margin: 0px 8px ;
+    margin: 8px 16px ;
     font-size: large;
 }

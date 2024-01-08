@@ -49,10 +49,9 @@ export default function EventListComponent(){
     }
 
     return(
-        <div className="container">
-            <h1>Your Events</h1>
-            <hr/>
-            <table className="table table-light table-striped table-hover">
+        <div className="event-body p-2">
+            <p className="event-title m-2 text-4xl drop-shadow-xl">Events</p>
+            <table className="table table-light table-striped table-hover ">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -79,7 +78,7 @@ export default function EventListComponent(){
                     }
                 </tbody>
             </table>
-            <Button className="btn btn-light" onClick={()=>createEvent(-1)}>Add</Button>
+            <Button className="btn btn-light w-40 hover:shadow-xl" onClick={()=>createEvent(-1)}>Add</Button>
         </div>
     );
 }
