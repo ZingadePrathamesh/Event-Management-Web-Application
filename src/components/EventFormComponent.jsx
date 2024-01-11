@@ -89,58 +89,60 @@ export default function EventFormComponent(){
     const statusOptions = ["Upcoming", "Ongoing", "Completed"];
 
     return(
-        <div className="p-4">
+        <div className="form-div p-4">
             <h1>Event Form</h1>
-            <Formik initialValues={{name, status, targetDate}}
-            enableReinitialize={true}
-            onSubmit={(values) => handleSubmit(values)}
-            validate={validationFunction}
-            validateOnBlur={false}
-            validateOnChange={false}>
-                {
-                    (props)=>(
-                        <Form className="form">
-                            <ErrorMessage
-                                name="name"
-                                className="alert alert-warning"
-                                component="h6"
-                            />
-                            <ErrorMessage
-                                name="targetDate"
-                                className="alert alert-warning"
-                                component="h6"
-                            />
-                            <ErrorMessage
-                                name="status"
-                                className="alert alert-warning"
-                                component="h6"
-                            />
-                            <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
-                                <label className="form-label">Name</label>
-                                <Field className="form-control p-1" name="name" type="text"/>
-                            </fieldset>
-                            <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
-                                <label className="form-label">Status</label>
-                                <Field as="select" name="status" className="form-select">
-                                    <option value="" key="">Select an option</option>
-                                    {statusOptions.map((option) => (
-                                    <option key={option} value={option}>
-                                        {option}
-                                    </option>
-                                    ))}
-                                </Field>
-                            </fieldset>
-                            <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
-                                <label className="form-label">Target Date</label>
-                                <Field className="form-control p-1" name="targetDate" type="date"/>
-                            </fieldset>
-                            <div>
-                                <Button className="btn btn-light m-3" type="submit">Save</Button>
-                            </div>
-                        </Form>
-                    )
-                }
-            </Formik>
+            <div className="form-div-controller">
+                <Formik initialValues={{name, status, targetDate}}
+                enableReinitialize={true}
+                onSubmit={(values) => handleSubmit(values)}
+                validate={validationFunction}
+                validateOnBlur={false}
+                validateOnChange={false}>
+                    {
+                        (props)=>(
+                            <Form className="form">
+                                <ErrorMessage
+                                    name="name"
+                                    className="alert alert-warning"
+                                    component="h6"
+                                />
+                                <ErrorMessage
+                                    name="targetDate"
+                                    className="alert alert-warning"
+                                    component="h6"
+                                />
+                                <ErrorMessage
+                                    name="status"
+                                    className="alert alert-warning"
+                                    component="h6"
+                                />
+                                <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
+                                    <label className="form-label">Name</label>
+                                    <Field className="form-control p-1" name="name" type="text"/>
+                                </fieldset>
+                                <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
+                                    <label className="form-label">Status</label>
+                                    <Field as="select" name="status" className="form-select">
+                                        <option value="" key="">Select an option</option>
+                                        {statusOptions.map((option) => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                        ))}
+                                    </Field>
+                                </fieldset>
+                                <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
+                                    <label className="form-label">Target Date</label>
+                                    <Field className="form-control p-1" name="targetDate" type="date"/>
+                                </fieldset>
+                                <div>
+                                    <Button className="btn btn-light m-3" type="submit">Save</Button>
+                                </div>
+                            </Form>
+                        )
+                    }
+                </Formik>
+            </div>
         </div>
     );
 }

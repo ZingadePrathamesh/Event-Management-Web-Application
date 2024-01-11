@@ -104,7 +104,7 @@
     transform: scale(0.9);
    }
 
-   .event-cards{
+   .event-cards, .task-div{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
@@ -139,7 +139,10 @@
     text-align: center;
     height: 100%;
   }
-  
+  .card-textbody{
+    width: 100%;
+    height: fit-content;
+  }
   .card-content .card-title {
     font-size: 24px;
     font-weight: 700;
@@ -197,9 +200,81 @@
     flex-direction: row;
     justify-content: space-between;
   }
+  .card-div{
+    display: flex;
+    padding: 16px 16px;
+    height: fit-content;
+    border-radius: 15px;
+    width:fit-content;
+    background: linear-gradient(to right, #FF66C4, #5170FF);
+    transition: transform 1.5s cubic-bezier(0.23, 1, 0.320, 1);
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.card-div:hover{
+    transform: scale(1.02);
+    transition: transform 1.5s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 0px 0px 16px blueviolet;
+}
+.top-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.mid-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.bottom-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+.task-subtext{
+    margin: 0;
+    margin-left: 48px;
+    padding: 0;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.task-text{
+    margin: 0px;
+    margin-right: 48px;
+    padding: 0px;
+    font-size: 36px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.task-date{
+    margin: 0px;
+    margin-right: 48px;
+    padding: 0px;
+    font-size: 16px;
+    opacity: 0.8;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.task-bottomtext{
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.task-div{
+  display: grid;
 
-  
-  
+}
+.form-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.form-div-controller{
+  width: 50%;
+  border: 2px solid red;
+} 
   
   
   

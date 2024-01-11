@@ -81,11 +81,32 @@ export default function TaskListComponent({eventId}){
         //     </div>
         // </div>
         <div>
-            {
-                tasks.map(task=>(
-                    <div>hello</div>
-                ))
-            }
+            <div>
+                    <Button className="btn btn-light w-80 m-3" onClick={()=>createNewTask(eventId, -1)}>Add</Button>
+            </div>
+            <div className="task-div p-2">
+                {
+                    tasks.map(task=>(
+                        <div class="card-div">
+                            <div class="top-card">
+                                <p class="task-text mr-40">{task.taskName}</p>
+                                <p class="task-subtext ml-48 text-white" >{task.taskStatus}</p>
+                            </div>
+                                <div class="mid-card">
+                                    <p class="task-date">{task.deadline}</p>
+                                    <div>
+                                        <button className="btn btn-dark" onClick={()=>createNewTask(eventId, task.taskId)}>Update</button>
+                                        <button class="btn btn-danger m-2" onClick={()=>deleteTask(eventId, task.taskId)}>Delete</button>
+                                    </div>
+                                </div>
+                            <div class="bottom-card">
+                                <p class="task-bottomtext" >{task.assignedTo}</p>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+            
         </div>
     );
 }

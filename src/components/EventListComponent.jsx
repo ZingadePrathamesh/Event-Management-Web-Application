@@ -88,17 +88,21 @@ export default function EventListComponent(){
             <div className="event-cards">
                 
                 {events.map(event=>(
-                    <Link className="nav-link" to={`/event-view/${event.eventId}`}>
+                    
                         <div class="card">
                             <div class="card-content">
-                                <p class="card-title">{event.name}</p>
-                                <p class="card-para">{event.status}</p>
-                                <p class="card-para">{event.targetDate}</p>
-                                <Button className="btn btn-dark" onClick={()=>updateEvent(event.eventId)}>Update</Button>
-                                <Button className="btn btn-danger" onClick={()=>deleteEvent(event.eventId)}>Delete</Button>
+                                <div class="card-textbody">
+                                    <Link className="nav-link" to={`/event-view/${event.eventId}`}>
+                                    <p class="card-title">{event.name}</p>
+                                    <p class="card-para">{event.status}</p>
+                                    <p class="card-para">{event.targetDate}</p>
+                                    </Link>
+                                </div>
+                            <Button className="btn btn-dark" onClick={()=>updateEvent(event.eventId)}>Update</Button>
+                            <Button className="btn btn-danger" onClick={()=>deleteEvent(event.eventId)}>Delete</Button>
                             </div>
                         </div>
-                    </Link>
+                   
                 ))}
             </div>
         </div>
