@@ -3,12 +3,14 @@ import { GetAuthContext } from "./security/AuthContext";
 import { deleteTaskForIdApi, retrieveTasksForIdApi } from "./api/TasksApiService";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import moment from "moment/moment";
 
 export default function TaskListComponent({eventId}){
     const authContext = GetAuthContext();
     const navigate = useNavigate();
     const username = authContext.username;
     const [tasks, setTasks] = useState([]);
+    const momentDate = moment();
 
     useEffect(
         retrieveTasks, 
@@ -93,7 +95,7 @@ export default function TaskListComponent({eventId}){
                                 <p class="task-subtext ml-48 text-white" >{task.taskStatus}</p>
                             </div>
                                 <div class="mid-card">
-                                    <p class="task-date">{task.deadline}</p>
+                                    <p class="task-date text-white">{moment(task.deadline).format('MMMM Do YYYY')}</p>
                                     <div>
                                         <button className="btn btn-dark" onClick={()=>createNewTask(eventId, task.taskId)}>Update</button>
                                         <button class="btn btn-danger m-2" onClick={()=>deleteTask(eventId, task.taskId)}>Delete</button>

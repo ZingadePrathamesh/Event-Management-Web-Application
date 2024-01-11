@@ -69,30 +69,33 @@ export default function TaskFormComponent(){
     const optionTaskStatus = ["Completed", "Pending", "dropped"];
 
     return(
-        <div style={{textAlign:"left"}}>
-            <div className="p-3"><h1>Task Form</h1></div>
+        <div className="form-div p-4" style={{textAlign:"left"}}>
+             <h1>Task Form</h1>
+            <div className="form-div-controller">
+               
+            
             <Formik 
             initialValues={{taskName, taskStatus, deadline, assignedTo}}
             enableReinitialize={true}
             onSubmit={handleTaskSubmission}>
                 {
                     (props)=>(
-                        <Form className="form p-3">
-                            <fieldset className="form-group">
-                                <FormLabel>Name</FormLabel>
-                                <Field name = "taskName" type= "text"/>
+                        <Form className="form">
+                            <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
+                                <FormLabel className="form-label">Name</FormLabel>
+                                <Field className="form-control p-1" name = "taskName" type= "text"/>
                             </fieldset>
-                            <fieldset className="form-group">
-                                <FormLabel>Assigned To</FormLabel>
-                                <Field name = "assignedTo" type= "text"/>
+                            <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
+                                <FormLabel className="form-label">Assigned To</FormLabel>
+                                <Field className="form-control p-1" name = "assignedTo" type= "text"/>
                             </fieldset>
-                            <fieldset className="form-group">
-                                <FormLabel>Deadline</FormLabel>
-                                <Field name = "deadline" type= "date"/>
+                            <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
+                                <FormLabel className="form-label">Deadline</FormLabel>
+                                <Field className="form-control p-1" name = "deadline" type= "date"/>
                             </fieldset>
                             <fieldset>
-                                <FormLabel>Status</FormLabel>
-                                <Field as="select"  name="taskStatus" className="form-select">
+                                <FormLabel className="form-label">Status</FormLabel>
+                                <Field className="form-control form-select p-1" as="select"  name="taskStatus">
                                     <option value="" key="" >Select an option</option>
                                     {
                                         optionTaskStatus.map(
@@ -108,7 +111,7 @@ export default function TaskFormComponent(){
                     )
                 }
             </Formik>
-
+            </div>
         </div>
     );
 }

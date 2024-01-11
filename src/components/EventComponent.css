@@ -25,6 +25,7 @@
     background: url('image/eventbg.png');
     height: 100%;
     display: flex;
+    font-size: 18px;
     align-items: start;
     justify-content: start;
     flex-direction: column;
@@ -53,6 +54,7 @@
     font-weight: bolder;
 }
 .event-title{
+  font-size: 48px;
     font-weight: bolder;
 }
 
@@ -273,7 +275,6 @@
 }
 .form-div-controller{
   width: 50%;
-  border: 2px solid red;
 } 
   
   

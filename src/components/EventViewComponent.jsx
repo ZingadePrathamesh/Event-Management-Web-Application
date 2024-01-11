@@ -3,6 +3,7 @@ import { GetAuthContext } from "./security/AuthContext";
 import { useEffect, useState } from "react";
 import { retrieveEventForId } from "./api/EventsApiService";
 import TaskListComponent from "./TaskListComponent";
+import moment from "moment/moment";
 
 export default function EventViewComponent(){
     const {eventId} = useParams();
@@ -38,7 +39,7 @@ export default function EventViewComponent(){
                 Status: {status}
             </div>
             <div className="event-details">
-                Date: {targetDate}
+                Date: {moment(targetDate).format('MMMM Do YYYY')}
             </div>
             <hr/>
             <div style={{width: "100%"}}>
