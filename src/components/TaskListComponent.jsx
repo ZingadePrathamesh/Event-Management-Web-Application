@@ -46,39 +46,46 @@ export default function TaskListComponent({eventId}){
     }
 
     return(
+        // <div>
+        //     <table className="table table-light table-striped table-hover">
+        //         <thead>
+        //             <tr>
+        //                 <th>Id</th>
+        //                 <th>Name</th>
+        //                 <th>Assigned</th>
+        //                 <th>Deadline</th>
+        //                 <th>Status</th>
+        //                 <th></th>
+        //                 <th></th>
+        //             </tr>
+        //         </thead>
+        //         <tbody>
+        //             {
+        //                 tasks.map( task=>(
+        //                     <tr key={task.taskId}>
+        //                         <td>{task.taskId}</td>
+        //                         <td>{task.taskName}</td>
+        //                         <td>{task.assignedTo}</td>
+        //                         <td>{task.deadline}</td>
+        //                         <td>{task.taskStatus}</td>
+        //                         <td><Button className="btn btn-dark" onClick={()=>createNewTask(eventId, task.taskId)}>Update</Button></td>
+        //                         <td><Button className="btn btn-danger" onClick={()=>deleteTask(eventId, task.taskId)}>Delete</Button></td>
+        //                     </tr>
+        //                 )
+        //                 )
+        //             }
+        //         </tbody>
+        //     </table>
+        //     <div>
+        //         <Button className="btn btn-light" onClick={()=>createNewTask(eventId, -1)}>Add</Button>
+        //     </div>
+        // </div>
         <div>
-            <table className="table table-light table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Assigned</th>
-                        <th>Deadline</th>
-                        <th>Status</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        tasks.map( task=>(
-                            <tr key={task.taskId}>
-                                <td>{task.taskId}</td>
-                                <td>{task.taskName}</td>
-                                <td>{task.assignedTo}</td>
-                                <td>{task.deadline}</td>
-                                <td>{task.taskStatus}</td>
-                                <td><Button className="btn btn-dark" onClick={()=>createNewTask(eventId, task.taskId)}>Update</Button></td>
-                                <td><Button className="btn btn-danger" onClick={()=>deleteTask(eventId, task.taskId)}>Delete</Button></td>
-                            </tr>
-                        )
-                        )
-                    }
-                </tbody>
-            </table>
-            <div>
-                <Button className="btn btn-light" onClick={()=>createNewTask(eventId, -1)}>Add</Button>
-            </div>
+            {
+                tasks.map(task=>(
+                    <div>hello</div>
+                ))
+            }
         </div>
     );
 }
