@@ -33,7 +33,7 @@ export default function EventViewComponent(){
     }
 
     return(
-        <div className="event-body">
+        <div className="event-body task-background p-2">
             <div className="event-title">{name}</div>
             <div className="event-details">
                 Status: {status}

@@ -35,7 +35,7 @@ export default function TaskComponent(){
     };
 
     return(
-        <div>
+        <div className="task-background">
             <Formik
             initialValues={{eventId}}
             enableReinitialize ={true}

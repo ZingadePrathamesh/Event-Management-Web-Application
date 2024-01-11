@@ -1,6 +1,4 @@
 
-
-
 .login-body{
 
     display: flex;
@@ -22,7 +20,7 @@
     flex-direction: column;
 }
 .event-body{
-    background: url('image/eventbg.png');
+    background-image: url('image/eventbg.png');
     height: 100%;
     display: flex;
     font-size: 18px;
@@ -30,7 +28,10 @@
     justify-content: start;
     flex-direction: column;
 }
-
+.event-details{
+  margin: 0;
+  padding: 0;
+}
 .mid-div{
     display: flex;
     align-items: start;
@@ -47,6 +48,11 @@
     width: 100%;
     margin: 0px 16px;
     padding: 0px 16px;
+}
+.task-background{
+  height: 100%;
+  width: 100%;
+  background: url('image/eventbg.png');
 }
 
 .title{
