@@ -1,5 +1,6 @@
 package com.example.eventmanagerrestservice.event;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.eventmanagerrestservice.task.TaskBean;
 import com.example.eventmanagerrestservice.task.TaskJPAService;
@@ -32,12 +34,17 @@ public class EventController {
 
 	@GetMapping(path= "/users/{username}/events")
 	public List<EventBean> getAllEventsByUsername(@PathVariable String username){
-		return eventJPAService.findAllByUsername(username);
+		List<EventBean> findAllByUsername = eventJPAService.findAllByUsername(username);
+		if(findAllByUsername.isEmpty()) throw new EventNotFoundException("username: " + username);
+		return findAllByUsername;
 	}
 	
 	@PostMapping(path= "/users/{username}/events")
-	public void createEventsForUser(@RequestBody @Valid EventBean event){
-		eventJPAService.save(event);
+	public ResponseEntity<Object> createEventsForUser(@PathVariable String username, @RequestBody @Valid EventBean event){
+		event.setUsername(username);
+		EventBean savedEvent = eventJPAService.save(event);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{eventId}").buildAndExpand(savedEvent.getEventId()).toUri();
+		return ResponseEntity.created(location).build();
 	}
 	
 	//To retrieve a single event using the id
