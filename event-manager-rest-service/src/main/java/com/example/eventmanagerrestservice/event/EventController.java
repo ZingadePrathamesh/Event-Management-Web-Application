@@ -75,8 +75,6 @@ public class EventController {
 	@PutMapping(path = "/users/{username}/events/{id}")
 	public void updateEvent(@PathVariable Integer id,@RequestBody @Valid EventBean event) {
 		Optional<EventBean> eventOpt = eventJPAService.findById(id);
-		System.out.println(eventOpt.get());
-		System.out.println(event);
 		if(eventOpt.isEmpty()) {
 			eventJPAService.save(event);
 		}
@@ -88,5 +86,7 @@ public class EventController {
 			eventJPAService.save(eventFin);
 		}	
 	}
+	
+	
 	
 }

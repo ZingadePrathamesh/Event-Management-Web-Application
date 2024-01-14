@@ -3,6 +3,7 @@ package com.example.eventmanagerrestservice.event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -104,7 +105,25 @@ class EventControllerTest {
 	        verify(taskJPAService, times(tasks.size())).deleteById(anyInt()); // Verify tasks were deleted
 	        verify(eventJPAService).deleteById(eventId); // Verify event was deleted
 	    }
+	    
+	    @Test
+	    public void testUpdateEvent() {
+	        int eventId = 1;
+	        EventBean updatedEvent = new EventBean(10,"testuser" ,"Updated Event", "New Status", LocalDate.now());
 
+	        // Mock the behavior of eventJPAService.findById
+	        when(eventJPAService.findById(eventId)).thenReturn(Optional.of(new EventBean()));
+
+	        eventController.updateEvent(eventId, updatedEvent);
+
+	        // Verify that eventJPAService.save is called with the expected event
+	        verify(eventJPAService).save(argThat(event -> {
+	            assertEquals("Updated Event", event.getName());
+	            assertEquals("New Status", event.getStatus());
+	            assertEquals(LocalDate.now(), event.getTargetDate());
+	            return true;
+	        }));
+	    }
 
 
 }
