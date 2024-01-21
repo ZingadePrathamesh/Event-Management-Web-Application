@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { GetAuthContext } from "./security/AuthContext";
 import './EventComponent.css';
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
 export default function LoginComponent(){
-    const username = "programmer"
-    const password = "abcd"
+    const username = ""
+    const password = ""
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState(false);
     const authContext = GetAuthContext();
@@ -32,6 +31,9 @@ export default function LoginComponent(){
             setErrorMessage(true);
         }
 
+    }
+    function signUp(){
+        navigate("/signup")
     }
     async function validationLogin(values){
         const errors = {}
@@ -73,31 +75,32 @@ export default function LoginComponent(){
                     validate={validationLogin}
                     validateOnBlur = {false}
                     validateOnChange = {false}>
-                        <Form className="">
+                        <Form className="form">
                             <ErrorMessage
                                 component="div"
                                 name="username"
                                 className=""
                             />
                             {errorMessage && <div>Invalid credentials</div>}
-                            <fieldset className="">
+                            <fieldset className="form-group m-2">
                                 <label className="block text-sm font-medium leading-6 text-gray-900">Username</label>
-                                <div class="mt-2">
-                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <div className="mt-2">
+                                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                         <Field type = "text" name="username" className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 m:text-m m:leading-6"/>
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset className="">
+                            <fieldset className="form-group m-2">
                                 <label className="block mt-3 text-sm font-medium leading-6 text-gray-900">Password</label>
-                                <div class="mt-2">
-                                    <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <div className="mt-2">
+                                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                         <Field type = "password" name="password" className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-gray-300 m:text-m m:leading-6"/>
                                     </div>
                                 </div>
                             </fieldset>
-                            <div class="mt-6 flex items-center justify-end gap-x-6">
-                                <button type="submit" class="btn btn-light">Login</button>
+                            <div className="mt-6 flex items-center justify-end gap-x-6">
+                                <button type="submit" className="btn btn-light">Login</button>
+                                <button className="btn btn-light" onClick={signUp}>Sign Up</button>
                             </div>
                         </Form>
                     </Formik>

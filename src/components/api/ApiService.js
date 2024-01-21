@@ -13,3 +13,7 @@ export function executeBasicAuthentication(token){
         }
     })
 }
+
+export function executeCreateNewUser(user){
+    return apiClient.post(`/api/signup`, user);
+}

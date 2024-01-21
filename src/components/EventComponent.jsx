@@ -9,9 +9,9 @@ import LogoutComponent from './LogoutComponent';
 import WelcomeComponent from './WelcomeComponent';
 import EventFormComponent from './EventFormComponent';
 import EventViewComponent from './EventViewComponent';
-import TaskListComponent from './TaskListComponent';
 import TaskComponent from './TaskComponent';
 import TaskFormComponent from './TaskFormComponent';
+import  SignUpComponent  from './SignUpComponent';
 
 export function Authenticate({children}){
     const authContext = GetAuthContext();
@@ -32,6 +32,7 @@ export default function EventComponent(){
                 <Routes>
                     <Route path='/' element={<LoginComponent/>}/>
                     <Route path='/login' element={<LoginComponent/>}/>
+                    <Route path='/signup' element={<SignUpComponent/>}/>
                     <Route path='/welcome/:username' element={
                         <Authenticate>
                             <WelcomeComponent/>
