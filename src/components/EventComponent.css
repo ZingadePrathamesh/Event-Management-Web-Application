@@ -112,7 +112,7 @@
     transform: scale(0.9);
    }
 
-   .event-cards, .task-div{
+   .event-cards{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
@@ -270,7 +270,9 @@
 }
 .task-div{
   display: grid;
-
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }
 .form-div {
   width: 100%;

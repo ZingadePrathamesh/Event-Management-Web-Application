@@ -4,6 +4,7 @@ import { Button, FormLabel } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
 import { createTasksApi, getTaskForIdApi, updateTasksApi } from "./api/TasksApiService";
 import { GetAuthContext } from "./security/AuthContext";
+import { getUserNameApi } from "./api/UserService";
 
 export default function TaskFormComponent(){
     const authContext = GetAuthContext();
@@ -15,12 +16,14 @@ export default function TaskFormComponent(){
     const [taskStatus, setTaskStatus] = useState("");
     const [deadline, setDeadline] = useState("");
     const [assignedTo, setAssignedTo] = useState("");
+    const [optionUserNames, setOptionUserNames] = useState([]);
 
     useEffect(
         retrieveTask, []
     )
 
     function retrieveTask(){
+        retrieveUserNames()
         if(taskId != -1){
             getTaskForIdApi(username, eventId, taskId)
             .then(
@@ -35,6 +38,16 @@ export default function TaskFormComponent(){
                 error=>console.error(error)
             )
         }
+    }
+
+    function retrieveUserNames(){
+        getUserNameApi()
+        .then(
+            response => setOptionUserNames(response.data)
+        )
+        .catch(
+            error => console.error(error)
+        )
     }
 
 
@@ -87,7 +100,16 @@ export default function TaskFormComponent(){
                             </fieldset>
                             <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
                                 <FormLabel className="form-label">Assigned To</FormLabel>
-                                <Field className="form-control p-1" name = "assignedTo" type= "text"/>
+                                <Field className="form-control form-select p-1" as="select"  name="assignedTo">
+                                    <option value="" key="" >Select an option</option>
+                                    {
+                                        optionUserNames.map(
+                                            (option)=>(
+                                                <option key={option} value={option}>{option}</option>
+                                            )              
+                                        )
+                                    }
+                                </Field>
                             </fieldset>
                             <fieldset className="form-group m-2" style={{ textAlign: 'left' }}>
                                 <FormLabel className="form-label">Deadline</FormLabel>
